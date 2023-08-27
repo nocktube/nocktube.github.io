@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {text-align: center;}
+        #findDetails {margin: 0 auto; width: 50%; background-color: floralwhite; color: darkslategray;}
+        input {width: 120px;}
+    </style>
+</head>
+<body>
+    <div id="findDetails">
+        <h1>Find by Name (Image ID)</h1>
+        <h4>Name (Image ID)</h4>
+        <input id="findName" type="text"> <br><br>
+        <button id="find">FIND</button>
+        <img id="findImage" src="" alt="Image not found" width="200">
+    </div>
+    
+    <script type="module">
+        const firebaseConfig = {
+    apiKey: "AIzaSyBiyqkXU0JTxEZdmfKGrtuMTvIGvYGq7Fw",
+    authDomain: "uploadimg-a8243.firebaseapp.com",
+    projectId: "uploadimg-a8243",
+    storageBucket: "uploadimg-a8243.appspot.com",
+    messagingSenderId: "661895407436",
+    appId: "1:661895407436:web:7523d8bf57c672f66ed1e9"
+  };
+        // Import Firebase Storage
+        import { getStorage, ref as storageRef, getDownloadURL } 
+        from "https://www.gstatic.com/firebasejs/9.9.0/firebase-database.js"
+
+        // Initialize Firebase Storage
+        const storage = getStorage();
+
+        // Function to find and display an image from Firebase Storage by name (ID)
+        function FindImage() {
+            const findName = document.querySelector("#findName").value;
+
+            // Construct the path to your images in Firebase Storage using the name (ID)
+            const imagePath = findName + ".jpg"; // Modify this according to your storage structure
+
+            // Get the download URL for the image
+            getDownloadURL(storageRef(storage, imagePath))
+                .then((url) => {
+                    const findImage = document.querySelector("#findImage");
+                    findImage.src = url;
+                })
+                .catch((error) => {
+                    alert("Image not found or error: " + error);
+                });
+        }
+
+        // Event listener for the "FIND" button
+        document.querySelector("#find").addEventListener('click', FindImage);
+    </script>
+</body>
+</html>

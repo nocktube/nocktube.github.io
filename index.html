@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="Capture.PNG" type="image/png">
+    <title>NockTube</title>
+</head>
+<body>
+    <div class="headerr">
+        <a href="index.html">
+        <header>Nock<span class="header1">Tube</span></header></a>
+        <img src="Capture.PNG" alt="NockTube" class="png">
+    </div>
+    <div class="add" title="Add Image">
+        <a href="upload.html">
+            <i class='bx bxs-image'></i>
+        </a>
+    </div>
+    <div class="account">
+        <button class="login" onclick="location.href='account.html'">Account</button>
+    </div>
+    <div class="search">
+        <input type="search" class="searchIn" placeholder="Search NockTube..." id="searchInput">
+        <button type="button" class="searchBtn" id="searchBtn">
+            <i class="bx bx-search-alt-2"></i>
+        </button>
+    </div>
+    <div id="mediaList" class="media-list"></div>
+    <div id="imageList" class="image-list"></div>
+    <footer>
+        <span>&copy;</span>2023 <p class="p">Nock<span class="p2">Tube</span></p>. All rights reserved.
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-storage.js"></script>
+
+    <script type="module" src="app.js"></script>
+    <script src="dist/bundle.js"></script>
+
+</body>
+</html>

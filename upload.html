@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="upload.css">
+    <link rel="icon" href="Capture.PNG" type="image/png">
+    <title>Upload</title>
+</head>
+<body>
+    
+    <div class="container">
+        <input type="file" for="fileInput" id="fileInput" accept="image/*" hidden class="select-image">
+ 
+        <div class="img-area" data-img="">
+            <i class='bx bxs-cloud-upload icon'></i>
+            <h3>Upload Image</h3>
+            <p>Image size must be less than <span>2MB</span></p>
+        </div>
+        <button id="uploadButton" class="select-image2">Upload</button>
+        <progress id="uploadProgress" value="0" max="100"></progress>
+        <div id="message"></div>
+    </div>
+
+    <script>
+        const selectImage = document.querySelector('.select-image');
+        const inputFile = document.querySelector('#fileInput');
+        const imgArea = document.querySelector('.img-area');
+        
+        selectImage.addEventListener('click', function () {
+            inputFile.click();
+        })
+        
+        inputFile.addEventListener('change', function () {
+            const image = this.files[0]
+            if(image.size < 2000000) {
+                const reader = new FileReader();
+                reader.onload = ()=> {
+                    const allImg = imgArea.querySelectorAll('img');
+                    allImg.forEach(item=> item.remove());
+                    const imgUrl = reader.result;
+                    const img = document.createElement('img');
+                    img.src = imgUrl;
+                    imgArea.appendChild(img);
+                    imgArea.classList.add('active');
+                    imgArea.dataset.img = image.name;
+                }
+                reader.readAsDataURL(image);
+            } else {
+                alert("Image size more than 2MB");
+            }
+        })
+    </script>
+    <script src="https://www.gstatic.com/firebasejs/10.3.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.3.0/firebase-storage-compat.js"></script>
+    <script src="upload.js"></script>
+</body>
+</html>
